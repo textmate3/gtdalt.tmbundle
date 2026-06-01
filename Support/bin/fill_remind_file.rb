@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby18
+#!/usr/bin/env ruby
 require File.join(ENV['TM_BUNDLE_SUPPORT'],'lib','GTD.rb')
 include GTD
 filename = File.join(ENV['TM_GTD_DIRECTORY'], "gtdalt.reminders")
