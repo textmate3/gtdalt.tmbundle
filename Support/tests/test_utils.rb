@@ -1,8 +1,7 @@
 require "test/unit"
-$:.unshift "../lib"
 ENV['TM_GTD_CONTEXT'] = ""
 ENV['TM_GTD_CONTEXTS'] = "hello there"
-require "GTDUtils.rb"
+require_relative "../lib/GTDUtils"
 
 class TestUtils < Test::Unit::TestCase
   def setup

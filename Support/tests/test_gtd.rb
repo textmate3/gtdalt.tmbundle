@@ -1,5 +1,4 @@
 require "test/unit"
-$:.unshift "../lib"
 ENV['TM_GTD_CONTEXT'] = "hello there"
 ENV['TM_GTD_CONTEXTS'] = "hello there"
 # dump_object reads the editor's indentation settings from the environment
@@ -7,7 +6,8 @@ ENV['TM_GTD_CONTEXTS'] = "hello there"
 # tabs at width 2, so pin them for a deterministic round-trip.
 ENV['TM_SOFT_TABS'] = "YES"
 ENV['TM_TAB_SIZE'] = "2"
-require "GTD.rb"
+ENV['TM_GTD_DIRECTORY'] = __dir__
+require_relative "../lib/GTD"
 include GTD
 class TestGTD < Test::Unit::TestCase
   def setup
@@ -30,7 +30,7 @@ class TestGTD < Test::Unit::TestCase
   end
   def test_GTD_parse
     assert_equal(["hello","there"],GTDContexts.contexts)
-    File.open("test_example.gtd") do |f|
+    File.open("#{__dir__}/test_example.gtd") do |f|
       @data = f.read
     end
     instructions = GTD::parse(@data)
@@ -43,7 +43,7 @@ class TestGTD < Test::Unit::TestCase
     assert_equal([:action,"Hello there","email",nil], instructions[9])
   end
   def test_GTDFile_initialize
-    @object = GTDFile.new("test_example.gtd")
+    @object = GTDFile.new("#{__dir__}/test_example.gtd")
     assert_not_nil(@object)
     assert_equal(2, @object.projects.length)
     assert_equal(["World domination","A subproject"], @object.projects.map{|i| i.name})
@@ -90,7 +90,7 @@ class TestGTD < Test::Unit::TestCase
   end
   def test_dump_object
     test_GTDFile_initialize
-    File.open("test_example.gtd") do |f|
+    File.open("#{__dir__}/test_example.gtd") do |f|
       assert_equal(f.read.chomp, @object.dump_object)
     end
   end
