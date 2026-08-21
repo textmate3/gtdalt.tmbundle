@@ -1,7 +1,6 @@
 # Notes — test suite modernization (2026-08-20)
 
-Fourth `test_modernization` quest (pattern origin and index of quests:
-`taskmate.tmbundle/_NOTES.md`).
+Findings from modernizing this bundle's test suites (the working pattern is described in `taskmate.tmbundle/_NOTES.md`).
 
 ## Result
 
