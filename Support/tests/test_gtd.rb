@@ -2,6 +2,11 @@ require "test/unit"
 $:.unshift "../lib"
 ENV['TM_GTD_CONTEXT'] = "hello there"
 ENV['TM_GTD_CONTEXTS'] = "hello there"
+# dump_object reads the editor's indentation settings from the environment
+# (TextMate sets these for commands); the fixtures are authored with soft
+# tabs at width 2, so pin them for a deterministic round-trip.
+ENV['TM_SOFT_TABS'] = "YES"
+ENV['TM_TAB_SIZE'] = "2"
 require "GTD.rb"
 include GTD
 class TestGTD < Test::Unit::TestCase
