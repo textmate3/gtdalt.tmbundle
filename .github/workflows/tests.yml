@@ -1,0 +1,26 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: macos-26
+    env:
+      TM_SUPPORT_PATH: ${{ github.workspace }}/bundle-support.tmbundle/Support/shared
+      TM_BUNDLE_SUPPORT: ${{ github.workspace }}/Support
+      TM_BUNDLE_PATH: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v7
+      # The shared library every bundle's Ruby code requires through TM_SUPPORT_PATH.
+      - uses: actions/checkout@v7
+        with:
+          repository: textmate3/bundle-support.tmbundle
+          path: bundle-support.tmbundle
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "4.0"
+      - run: ruby Support/tests/test_gtd.rb
+      - run: ruby Support/tests/test_utils.rb
+
