@@ -22,7 +22,7 @@ jobs:
           submodules: true
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "4.0"
+          ruby-version: .ruby-version
       - run: ruby Support/tests/test_gtd.rb
       - run: ruby Support/tests/test_utils.rb
 
